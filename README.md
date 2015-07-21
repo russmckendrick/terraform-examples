@@ -1,6 +1,8 @@
-Some examples of how to use Terraform. 
+# Terraform Examples
 
-### Multi
+Some examples of how to use [Terraform](https://www.terraform.io). 
+
+#### Multi
 
 Launches an instance into;
 
