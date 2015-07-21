@@ -79,7 +79,7 @@ provider "aws" {
     region = "us-east-1"
 }
 
-resource "aws_instance" "web" {
+resource "aws_instance" "server" {
 
     ami = "ami-96a818fe"
     instance_type = "t2.micro"
