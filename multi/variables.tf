@@ -20,7 +20,7 @@ variable "do_ssh_fingerprint" {
 
 variable "server_name" {
 	description = "What do you want to tag / name your servers as?"
-    default = "MyAwesomeTerraformServer"
+    default = "server"
 }
 
 variable "azure_settings_file" {
@@ -45,4 +45,39 @@ variable "storage_service" {
 variable "azure_username" {
 	description = "What username would you like to create on your VM?"
 	default = "azureuser"
+}
+
+variable "aws_access_key" {
+	description = "Your AWS Access Key"
+	default = ""
+}
+
+variable "aws_secret_key" {
+	description = "Your AWS Secret Key"
+	default = ""
+}
+
+variable "aws_subnet_id" {
+	description = "Which AWS Subnet to launch instance in?"
+	default = ""
+}
+
+variable "aws_vpc" {
+	description = "Which AWS VPC to launch instance in?"
+	default = ""
+}
+
+variable "aws_key_name" {
+	description = "Which Key to launch your instance with?"
+	default = ""
+}
+
+variable "aws_hosted_zone_id" {
+	description = "Which Zone file to add A Record to?"
+	default = ""
+}
+
+variable "fqdn" {
+	description = "What sub-domain to add?"
+	default = ""
 }
