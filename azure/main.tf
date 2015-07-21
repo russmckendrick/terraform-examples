@@ -19,12 +19,29 @@ resource "azure_instance" "basic-server" {
     storage_service_name = "russstoreage"
     location = "West Europe"
     username = "azureuser"
-    password = "z69rVZfH"
+    ssh_key_thumbprint = "${var.ssh_key_thumbprint}"
 
     endpoint {
         name = "SSH"
         protocol = "tcp"
         public_port = 22
         private_port = 22
+    }
+
+    connection {
+        user = "azureuser"
+        type = "ssh"
+        key_file = "${var.pvt_key}"
+        timeout = "2m"
+        agent = false
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+            "sudo yum -y install epel-release",
+            "sudo yum -y update",
+            "sudo yum -y install nginx",
+            "sudo systemctl start nginx"
+        ]
     }
 }
