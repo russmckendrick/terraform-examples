@@ -19,12 +19,19 @@ resource "azure_instance" "basic-server" {
     location = "West Europe"
     username = "azureuser"
     password = "${var.azure_password}"
-
     endpoint {
         name = "SSH"
         protocol = "tcp"
         public_port = 22
         private_port = 22
+    }
+    provisioner "remote-exec" {
+    inline = [
+        "sudo yum -y install epel-release",
+        "sudo yum -y update",
+        "sudo yum -y install nginx",
+        "sudo systemctl start nginx"
+    ]
     }
 }
 
@@ -38,4 +45,16 @@ resource "digitalocean_droplet" "basic-server" {
     region = "nyc2"
     size = "512mb"
     ssh_keys = [ 49382, 985457 ]
+    connection {
+        key_file = "${var.do_ssh_private_key_file}"
+    }
+    provisioner "remote-exec" {
+    inline = [
+        "sudo yum -y install epel-release",
+        "sudo yum -y update",
+        "sudo yum -y install nginx",
+        "sudo systemctl start nginx"
+    ]
+    }
 }
+

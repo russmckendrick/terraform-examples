@@ -8,6 +8,11 @@ variable "do_token" {
     default = ""
 }
 
+variable "do_ssh_private_key_file" {
+	description = "Path to your Private Key file for accessing Digtial Ocean"
+    default = "~/.ssh/id_rsa"
+}
+
 variable "azure_password" {
 	description = "Password for the Azure Virtual Machine"
     default = "z69rVZfH"
