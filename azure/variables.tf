@@ -6,12 +6,23 @@ variable "ssh_key_thumbprint" {
 	default = ""
 }
 
-variable "pub_key" {
-	description = "Path to your public key"
-	default = "~/.ssh/id_rsa.pub"
-}
-
 variable "pvt_key" {
 	description = "Path to your private key"
 	default = "~/.ssh/id_rsa"
 }
+
+variable "hosted_service" {
+	description = "Which hosted service would you like to launch your VM in?"
+	default = ""
+}
+
+variable "storage_service" {
+	description = "Which storeage would you like to store your VM in?"
+	default = ""
+}
+
+variable "azure_username" {
+	description = "What username would you like to create on your VM?"
+	default = "azureuser"
+}
+

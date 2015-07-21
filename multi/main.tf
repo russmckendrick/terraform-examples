@@ -2,14 +2,6 @@ provider "azure" {
     settings_file = "${var.azure_settings_file}"
 }
 
-resource "azure_hosted_service" "terraform-service" {
-    name = "${var.server_name}-service"
-    location = "West Europe"
-    ephemeral_contents = false
-    description = "Hosted service created by Terraform."
-    label = "hs-${var.server_name}"
-}
-
 resource "azure_instance" "basic-server" {
     name = "${var.server_name}"
     hosted_service_name = "${azure_hosted_service.terraform-service.name}"

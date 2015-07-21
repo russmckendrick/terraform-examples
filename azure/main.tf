@@ -3,22 +3,14 @@ provider "azure" {
     settings_file = "${var.azure_settings_file}"
 }
 
-resource "azure_hosted_service" "terraform-service" {
-    name = "russ-terraform-service"
-    location = "West Europe"
-    ephemeral_contents = false
-    description = "Hosted service created by Terraform."
-    label = "russ-tf-hs-01"
-}
-
 resource "azure_instance" "basic-server" {
     name = "russ-terraform-test"
-    hosted_service_name = "${azure_hosted_service.terraform-service.name}"
+    hosted_service_name = "${var.hosted_service}"
     image = "OpenLogic 7.1"
     size = "Basic_A1"
-    storage_service_name = "russstoreage"
+    storage_service_name = "${var.storage_service}"
     location = "West Europe"
-    username = "azureuser"
+    username = "${var.azure_username}"
     ssh_key_thumbprint = "${var.ssh_key_thumbprint}"
 
     endpoint {
@@ -28,8 +20,15 @@ resource "azure_instance" "basic-server" {
         private_port = 22
     }
 
+    endpoint {
+        name = "WEB"
+        protocol = "tcp"
+        public_port = 80
+        private_port = 80
+    }
+
     connection {
-        user = "azureuser"
+        user = "${var.azure_username}"
         type = "ssh"
         key_file = "${var.pvt_key}"
         timeout = "2m"
