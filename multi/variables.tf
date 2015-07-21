@@ -20,5 +20,5 @@ variable "azure_store" {
 
 variable "server_name" {
 	description = "What do you want to tag / name your servers as?"
-    default = ""
+    default = "MyAwesomeTerraformServer"
 }
