@@ -1,25 +1,24 @@
-# Configure the Azure Provider
 provider "azure" {
     settings_file = "${var.azure_settings_file}"
 }
 
 resource "azure_hosted_service" "terraform-service" {
-    name = "russ-terraform-service"
+    name = "${var.server_name}-service"
     location = "West Europe"
     ephemeral_contents = false
     description = "Hosted service created by Terraform."
-    label = "russ-tf-hs-01"
+    label = "hs-${var.server_name}"
 }
 
 resource "azure_instance" "basic-server" {
-    name = "russ-terraform-test"
+    name = "${var.server_name}"
     hosted_service_name = "${azure_hosted_service.terraform-service.name}"
     image = "OpenLogic 7.1"
     size = "Basic_A1"
-    storage_service_name = "russstoreage"
+    storage_service_name = "${var.azure_store}"
     location = "West Europe"
     username = "azureuser"
-    password = "z69rVZfH"
+    password = "${var.azure_password}"
 
     endpoint {
         name = "SSH"
@@ -35,8 +34,8 @@ provider "digitalocean" {
 
 resource "digitalocean_droplet" "basic-server" {
     image = "centos-7-0-x64"
-    name = "web-1"
+    name = "${var.server_name}"
     region = "nyc2"
     size = "512mb"
-    ssh_keys = [ 49382 ]
+    ssh_keys = [ 49382, 985457 ]
 }
