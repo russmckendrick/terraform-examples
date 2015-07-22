@@ -27,5 +27,5 @@ resource "digitalocean_droplet" "basic-server" {
     provisioner "remote-exec" {
         inline = ["bash /tmp/script.sh"]
     }
-}
 
+}

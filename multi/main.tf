@@ -34,13 +34,15 @@ resource "azure_instance" "server" {
         agent = false
     }
 
-    provisioner "remote-exec" {
-        inline = [
-            "sudo yum -y install epel-release",
-            "sudo yum -y install nginx",
-            "sudo systemctl start nginx"
-        ]
+    provisioner "file" {
+        source = "script.sh"
+        destination = "/tmp/script.sh"
     }
+
+    provisioner "remote-exec" {
+        inline = ["bash /tmp/script.sh"]
+    }
+
 }
 
 provider "digitalocean" {
@@ -64,13 +66,15 @@ resource "digitalocean_droplet" "server" {
         agent = false
     }
 
-    provisioner "remote-exec" {
-        inline = [
-            "sudo yum -y install epel-release",
-            "sudo yum -y install nginx",
-            "sudo systemctl start nginx"
-        ]
+    provisioner "file" {
+        source = "script.sh"
+        destination = "/tmp/script.sh"
     }
+
+    provisioner "remote-exec" {
+        inline = ["bash /tmp/script.sh"]
+    }
+
 }
 
 provider "aws" {
@@ -95,12 +99,17 @@ resource "aws_instance" "server" {
         agent = false
     }
 
+    provisioner "file" {
+        source = "script.sh"
+        destination = "/tmp/script.sh"
+    }
+
     provisioner "remote-exec" {
-        inline = [
-            "sudo yum -y install epel-release",
-            "sudo yum -y install nginx",
-            "sudo systemctl start nginx"
-        ]
+        inline = ["bash /tmp/script.sh"]
+    }
+
+    tags {
+        Name = "${var.server_name}"
     }
 
 }
