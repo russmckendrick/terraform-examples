@@ -3,11 +3,6 @@ variable "do_token" {
 	default = ""
 }
 
-variable "pub_key" {
-	description = "Path to your public key"
-	default = "~/.ssh/id_rsa.pub"
-}
-
 variable "pvt_key" {
 	description = "Path to your private key"
 	default = "~/.ssh/id_rsa"
@@ -20,5 +15,5 @@ variable "ssh_fingerprint" {
 
 variable "server_name" {
 	description = "What do you want to tag / name your servers as?"
-    default = "MyAwesomeTerraformServer"
+    default = "server"
 }

@@ -34,12 +34,13 @@ resource "azure_instance" "basic-server" {
         agent = false
     }
 
-    provisioner "remote-exec" {
-        inline = [
-            "sudo yum -y install epel-release",
-            "sudo yum -y update",
-            "sudo yum -y install nginx",
-            "sudo systemctl start nginx"
-        ]
+    provisioner "file" {
+        source = "script.sh"
+        destination = "/tmp/script.sh"
     }
+
+    provisioner "remote-exec" {
+        inline = ["bash /tmp/script.sh"]
+    }
+
 }

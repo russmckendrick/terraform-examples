@@ -1,8 +1,3 @@
-variable "pub_key" {
-	description = "Path to your public key"
-	default = "~/.ssh/id_rsa.pub"
-}
-
 variable "pvt_key" {
 	description = "Path to your private key"
 	default = "~/.ssh/id_rsa"
